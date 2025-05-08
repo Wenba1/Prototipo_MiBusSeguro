@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Bus Seguro</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Pantalla de Bienvenida -->
+    <section class="screen welcome">
+      <h1>Mi Bus <br><strong>Seguro</strong></h1>
+      <img src="bus-icon.png" alt="Bus escolar" class="bus-img" />
+      <button class="btn-secondary">Comenzar</button>
+    </section>
+
+    <!-- Pantalla de Login -->
+    <section class="screen login">
+      <h2>Mi Bus Seguro</h2>
+      <input type="email" placeholder="Correo electrónico" />
+      <input type="password" placeholder="Contraseña" />
+      <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+      <button class="btn-primary">Ingresar</button>
+      <button class="btn-secondary">Registrarse</button>
+    </section>
+
+    <!-- Pantalla de Mapa -->
+    <section class="screen map">
+      <div class="map-box">[📍 Mapa aquí]</div>
+      <img src="Fotos/mapa gps.jpg" class="mapa-imagen" />
+      <div class="user-card">
+        <img src="avatar.png" class="avatar" />
+        <div>
+          <h3>Juan Pérez</h3>
+          <p>022-ABC</p>
+        </div>
+        <button class="status-btn">Recogido</button>
+      </div>
+    </section>
+
+    <!-- Pantalla de Paradas -->
+    <section class="screen stops">
+      <h2>Paradas</h2>
+      <ul>
+        <li><strong>8:15 a.m.</strong> - Calle Bolívar <span>Abordado</span></li>
+        <li><strong>9:45 a.m.</strong> - Cayla Sucre <span>Esperando</span></li>
+        <li><strong>9:00 a.m.</strong> - Esteban Arze <span>Bajado</span></li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
