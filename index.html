@@ -4,50 +4,155 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Bus Seguro</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f5f9;
+    }
+    .app-container {
+      width: 100vw;
+      max-width: 480px;
+      margin: auto;
+      overflow: hidden;
+    }
+    .screen {
+      padding: 20px;
+      background: white;
+      min-height: 100vh;
+    }
+    .welcome {
+      background: linear-gradient(to bottom, #61b0f9, #ffffff);
+      color: #fff;
+      text-align: center;
+    }
+    .welcome h1 {
+      font-size: 28px;
+      margin-top: 40px;
+    }
+    .bus-img {
+      margin-top: 40px;
+      width: 200px; 
+      max-width: 100%;
+    }
+    .login input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+    }
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 10px;
+    }
+    .btn-primary {
+      background-color: #1f66f7;
+      color: white;
+    }
+    .btn-secondary {
+      background-color: #e5f0ff;
+      color: #1f66f7;
+    }
+    #map {
+      height: 300px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .user-card {
+      display: flex;
+      align-items: center;
+      background: #f1f9ff;
+      padding: 10px;
+      border-radius: 12px;
+    }
+    .user-card img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    .user-card div {
+      margin-left: 10px;
+    }
+    .stops li {
+      background: #eef4fc;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      list-style: none;
+    }
+  </style>
 </head>
 <body>
   <div class="app-container">
-    <!-- Pantalla de Bienvenida -->
     <section class="screen welcome">
-      <h1>Mi Bus <br><strong>Seguro</strong></h1>
-      <img src="bus-icon.png" alt="Bus escolar" class="bus-img" />
+      <h1>Mi Bus <strong>Seguro</strong></h1>
+      <img src="Fotos/logo.png" alt="Bus escolar" class="bus-img" style="width: 200px;" />
       <button class="btn-secondary">Comenzar</button>
     </section>
 
-    <!-- Pantalla de Login -->
     <section class="screen login">
       <h2>Mi Bus Seguro</h2>
       <input type="email" placeholder="Correo electrónico" />
       <input type="password" placeholder="Contraseña" />
-      <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+      <a href="#" class="forgot">&#191;Olvidaste tu contraseña?</a>
       <button class="btn-primary">Ingresar</button>
       <button class="btn-secondary">Registrarse</button>
     </section>
 
-    <!-- Pantalla de Mapa -->
-    <section class="screen map">
-      <div class="map-box">[📍 Mapa aquí]</div>
-      <img src="Fotos/mapa gps.jpg" class="mapa-imagen" />
-      <div class="user-card">
-        <img src="avatar.png" class="avatar" />
-        <div>
-          <h3>Juan Pérez</h3>
-          <p>022-ABC</p>
-        </div>
-        <button class="status-btn">Recogido</button>
-      </div>
-    </section>
 
-    <!-- Pantalla de Paradas -->
-    <section class="screen stops">
-      <h2>Paradas</h2>
-      <ul>
-        <li><strong>8:15 a.m.</strong> - Calle Bolívar <span>Abordado</span></li>
-        <li><strong>9:45 a.m.</strong> - Cayla Sucre <span>Esperando</span></li>
-        <li><strong>9:00 a.m.</strong> - Esteban Arze <span>Bajado</span></li>
-      </ul>
+      <section class="screen map">
+         <div id="map"></div> <div class="user-card" style="justify-content: space-between;"> 
+          <div style="display: flex; align-items: center;"> 
+            <img src="https://img.icons8.com/ios-filled/50/user-male-circle.png" alt="Avatar" /> 
+            <div> <h3>Juan Pérez</h3> <p>022-ABC</p> </div> </div> 
+            <a href="tel:+59171234567"> 
+              <img src="https://img.icons8.com/ios-filled/30/1f66f7/phone.png" alt="Llamar" style="margin-left: 10px;" /> 
+            </a> 
+          </div>
+           <button class="btn-primary">Recogido</button>
+       </section>
+
+
+    <section class="screen stops"> 
+      <div style="display: flex; align-items: center; margin-bottom: 10px;"> 
+        <a href="#" onclick="window.history.back();"> 
+          <img src="https://img.icons8.com/ios-filled/24/1f66f7/left.png" alt="Volver atrás" style="margin-right: 10px;" /> 
+        </a> 
+        <h2 style="margin: 0;">Paradas</h2> 
+      </div> 
+      <ul> 
+        <li><strong>8:15 a.m.</strong> - 📍 Calle Bolívar <span>Abordado</span></li> 
+        <li><strong>9:45 a.m.</strong> - 📍 Cayla Sucre <span>Esperando</span></li> 
+        <li><strong>9:00 a.m.</strong> - 📍 Esteban Arze <span>Bajado</span></li> 
+      </ul> 
     </section>
   </div>
+
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-16.5, -68.15], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const stops = [
+      [-16.5, -68.15],
+      [-16.51, -68.16],
+      [-16.52, -68.14]
+    ];
+
+    const route = L.polyline(stops, { color: 'blue' }).addTo(map);
+    stops.forEach(stop => L.marker(stop).addTo(map));
+  </script>
 </body>
 </html>
